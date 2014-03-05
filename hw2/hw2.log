@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  4 MAR 2014 11:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  5 MAR 2014 16:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -693,8 +693,7 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v2.10 (rcs-revision 1.7)
 \c@proposition=\count139
 \c@define=\count140
 \digitwidth=\dimen173
-
-No file hw2.aux.
+ (./hw2.aux)
 \openout1 = `hw2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
@@ -709,6 +708,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
 LaTeX Font Info:    ... okay on input line 103.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
 LaTeX Font Info:    ... okay on input line 103.
+
 (/usr/local/texlive/2013basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count141
@@ -746,25 +746,67 @@ File: f3.png Graphic file (type png)
  <use f3.png>
 Package pdftex.def Info: f3.png used on input line 136.
 (pdftex.def)             Requested size: 398.33858pt x 143.62067pt.
- [1
+LaTeX Font Info:    Try loading font information for U+msa on input line 140.
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 140.
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+lasy on input line 140.
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+) [1
 
 {/usr/local/texlive/2013basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./
-f1.png> <./f2.png> <./f3.png>] (./hw2.aux) ) 
+f1.png> <./f2.png> <./f3.png>]
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 151.
+
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 151.
+ [2]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 203.
+
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 203.
+ [3] [4]
+[5] (./hw2.aux) ) 
 Here is how much of TeX's memory you used:
- 13018 strings out of 494536
- 236403 string characters out of 6167446
- 284269 words of memory out of 5000000
- 16004 multiletter control sequences out of 15000+600000
- 4245 words of font info for 16 fonts, out of 8000000 for 9000
+ 13286 strings out of 494536
+ 240403 string characters out of 6167446
+ 320701 words of memory out of 5000000
+ 16232 multiletter control sequences out of 15000+600000
+ 9257 words of font info for 37 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 56i,6n,55p,411b,275s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on hw2.pdf (1 page, 79524 bytes).
+ 56i,6n,55p,411b,1526s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013basic/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmti12.pfb>
+Output written on hw2.pdf (5 pages, 118160 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
- 13 compressed objects within 1 object stream
+ 46 PDF objects out of 1000 (max. 8388607)
+ 30 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  28 words of extra memory for PDF output out of 10000 (max. 10000000)
 

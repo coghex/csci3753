@@ -137,5 +137,145 @@ and are, overall, much more involved.
 \end{center}
 \end{figure}
 
+Since much of the question isnt very specific, there will be $a$ women, $b$ men, and $c$
+children trying to use the bathroom.  Assume that all of these people were declared in
+either the init function, or somewhere else.  The details are in the comments, since much
+of this code will not run.  Also, the problem contains inherent starvation, since if the
+bathroom is full of women, and more women keep coming, the men will have to wait until
+they are done.  There is not a way of fixing this without only letting a very small number
+of a gender use the bathroom at a time and trade off, which is innefficient.  To solve this
+problem I tried to make it as fair as possible, and in only very extreme cases will the
+person waiting starve, or find another bathroom.
+
+\begin{lstlisting}[language=C]
+monitor bathroommonitor {
+  // four states of the bathroom
+  enum {mens, womens, empty, full} state;
+  // each allows each person to be signaled.
+  condition w[a];
+  condition m[b];
+  condition c[c];
+  // number of men, women, children, and people currently
+  // using the bathroom
+  int men;
+  int women;
+  int children;
+  int num;
+
+  man_use_bathroom(int i) {
+    // add man to list of people waiting to use the bathroom
+    men++;
+    // if there are women in there wait
+    if (state == womens) {
+      m[i].wait();
+    }
+    // if its full wait
+    else if (state == full) {
+      m[i].wait();
+    }
+    else if (state == (empty || mens)) {
+      // go into the bathroom
+      num++;
+      // he is no longer waiting in line
+      men--;
+      // set the state to full if he makes it full
+      if (num == N) {
+        state = full;
+      }
+      else {
+        state = mens;
+      }
+      // pee or whatever
+      use_bathroom();
+      // leave
+      num--;
+      // if he was the last person, signal the next women
+      if (num == 0) {
+        state = empty;
+        if (women) {
+          w[women].signal();
+        }
+      }
+      else {
+        state = mens;
+        // if there are more children waiting than other guys,
+        // let them go first
+        if (children > men){
+          c[children].signal();
+        }
+        else {
+          m[men].signal();
+        }
+      }
+    }
+  }
+  woman_use_bathroom(int i) {
+    // this all works the same as with the men.
+    women++;
+    if (state == mens) {
+      w[i].wait();
+    }
+    else if (state == full) {
+      w[i].wait();
+    }
+    else if (state == (empty || womens)) {
+      num++;
+      women--;
+      if (num == N) {
+        state = full;
+      }
+      else {
+        state = womens;
+      }
+      use_bathroom();
+      num--;
+      if (num == 0) {
+        state = empty;
+        if (men) {
+          m[men].signal();
+        }
+      }
+      else {
+        state = womens;
+        if (children > women) {
+          c[children].signal();
+        }
+        else {
+          w[women].signal();
+        }
+      }
+    }
+
+  }
+  child_use_bathroom(int i) {
+    children++
+    if (state == full) {
+      c[i].wait();
+    }
+    else {
+      num++;
+      children--;
+      if (num == N) {
+        state = full;
+      }
+      use_bathroom();
+      num--;
+      // signal the group that has the most people waiting for
+      // fairness.
+      if (men > women) {
+        m[men].signal();
+      }
+    }
+  }
+
+  init() {
+    state = empty;
+    // in here somewhere we will set up all of the people who
+    // want to use the bathroom, for now I will leave it general.
+  }
+}
+
+\end{lstlisting}
+
 \end{document}
 
