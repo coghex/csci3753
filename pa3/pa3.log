@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  20 MAR 2014 15:26
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  21 MAR 2014 10:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1078,22 +1078,22 @@ Overfull \hbox (10.71661pt too wide) in paragraph at lines 96--97
 [1
 
 {/usr/local/texlive/2013basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] (./pa3.aux) ) 
+[2] [3] [4] [5] [6] (./pa3.aux) ) 
 Here is how much of TeX's memory you used:
  25654 strings out of 494536
  567874 string characters out of 6167446
- 621502 words of memory out of 5000000
+ 622502 words of memory out of 5000000
  28457 multiletter control sequences out of 15000+600000
  10928 words of font info for 44 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  63i,7n,57p,432b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013basic/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmr12.pfb>
-Output written on pa3.pdf (2 pages, 34764 bytes).
+</usr/local/texlive/2013basic/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on pa3.pdf (6 pages, 40273 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
- 15 compressed objects within 1 object stream
+ 34 PDF objects out of 1000 (max. 8388607)
+ 23 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

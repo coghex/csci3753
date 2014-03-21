@@ -109,9 +109,9 @@
 
 \section{References}
 
+\newpage
 \section{Appendix A - Raw Data}
 
-\newpage
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -167,6 +167,27 @@ SCHED\_OTHER & Low & CPU & 1 & 5.8735\\
  & & & avg & 47.8851\\
 \cline{2-5}
  & High & CPU & 1 & 147.1985\\
+\cline{4-5}
+ & & & 2 & 150.6363\\
+\cline{4-5}
+ & & & 3 & 148.8392\\
+\cline{4-5}
+ & & & avg & 148.8913\\
+\hline
+\end{tabular}
+\newpage
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Schedule & Utilization & Type & Trial & Execution Time (seconds)\\
+\hline
+\hline
+ SCHED\_OTEHR & High & I/O & 1 & 168.8146\\
+\cline{4-5}
+ & & & 2 & 169.8647\\
+\cline{4-5}
+ & & & 3 & 168.9283\\
+\cline{4-5}
+ & & & avg & 169.2025\\
 \cline{3-5}
  & & mixed & 1 & 238.4620\\
 \cline{4-5}
@@ -176,9 +197,141 @@ SCHED\_OTHER & Low & CPU & 1 & 5.8735\\
 \cline{4-5}
  & & & avg & 239.0033\\
 \hline
+ SCHED\_FIFO & Low & CPU & 1 & 6.2712\\
+\cline{4-5}
+ & & & 2 & 6.2239\\
+\cline{4-5}
+ & & & 3 & 6.2316\\
+\cline{4-5}
+ & & & avg & 6.2422\\
+\cline{3-5}
+ & & I/O & 1 & 7.0592\\
+\cline{4-5}
+ & & & 2 & 7.0326\\
+\cline{4-5}
+ & & & 3 & 7.0475\\
+\cline{4-5}
+ & & & avg & 7.0464\\
+\cline{3-5}
+ & & mixed & 1 & 10.1941\\
+\cline{4-5}
+ & & & 2 & 10.2298\\
+\cline{4-5}
+ & & & 3 & 10.2144\\
+\cline{4-5}
+ & & & avg & 10.2128\\
+\cline{2-5}
+ & Medium & CPU & 1 & 31.4025\\
+\cline{4-5}
+ & & & 2 & 31.3293\\
+\cline{4-5}
+ & & & 3 & 31.4259\\
+\cline{4-5}
+ & & & avg & 31.3859\\
+\cline{3-5}
+ & & I/O & 1 & 35.5476\\
+\cline{4-5}
+ & & & 2 & 35.4535\\
+\cline{4-5}
+ & & & 3 & 36.0892\\
+\cline{4-5}
+ & & & avg & 35.6968\\
+\cline{3-5}
+ & & mixed & 1 & 51.0813\\
+\cline{4-5}
+ & & & 2 & 51.2152\\
+\cline{4-5}
+ & & & 3 & 51.5310\\
+\cline{4-5}
+ & & & avg & 51.2758\\
+\hline
+\end{tabular}
+\newpage
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Schedule & Utilization & Type & Trial & Execution Time (seconds)\\
+\hline
+\hline
+SCHED\_FIFO & High & CPU & 1 & 157.4083\\
+\cline{4-5}
+ & & & 2 & 157.3154\\
+\cline{4-5}
+ & & & 3 & 156.8339\\
+\cline{4-5}
+ & & & avg & 157.1859\\
+\cline{3-5}
+ & & I/O & 1 & 178.4461\\
+\cline{4-5}
+ & & & 2 & 178.0876\\
+\cline{4-5}
+ & & & 3 & 179.4295\\
+\cline{4-5}
+ & & & avg & 178.6544\\
+\cline{3-5}
+ & & mixed & 1 & 256.0873\\
+\cline{4-5}
+ & & & 2 & 269.7028\\
+\cline{4-5}
+ & & & 3 & 264.3920\\
+\cline{4-5}
+ & & & avg & 263.3940\\
+\hline
+SCHED\_RR & Low & CPU & 1 & 6.2610\\
+\cline{4-5}
+ & & & 2 & 6.3182\\
+\cline{4-5}
+ & & & 3 & 6.3604\\
+\cline{4-5}
+ & & & avg & 6.3132\\
+\cline{3-5}
+ & & I/O & 1 & 7.1231\\
+\cline{4-5}
+ & & & 2 & 7.1374\\
+\cline{4-5}
+ & & & 3 & 7.0624\\
+\cline{4-5}
+ & & & avg & 7.1076\\
+\cline{3-5}
+ & & mixed & 1 & 10.2902\\
+\cline{4-5}
+ & & & 2 & 10.2280\\
+\cline{4-5}
+ & & & 3 & 10.2797\\
+\cline{4-5}
+ & & & avg & 10.2660\\
+\cline{2-5}
+ & Medium & CPU & 1 & 31.4602\\
+\cline{4-5}
+ & & & 2 & 31.3600\\
+\cline{4-5}
+ & & & 3 & 31.6350\\
+\cline{4-5}
+ & & & avg & 31.4851\\
+\cline{3-5}
+ & & I/O & 1 & 35.6692\\
+\cline{4-5}
+ & & & 2 & 35.5747\\
+\cline{4-5}
+ & & & 3 & 35.5019\\
+\cline{4-5}
+ & & & avg & 35.5819\\
+\hline
+\end{tabular}
+\newpage
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Schedule & Utilization & Type & Trial & Execution Time (seconds)\\
+\hline
+\hline
+SCHED\_RR & Medium & mixed & 1 & 51.4243\\
+\cline{4-5}
+& & & 2 & xx\\
+\hline
 \end{tabular}
 \end{center}
 
+
+\newpage
 \section{Appendix B - Description of Files}
 
 \end{document}
