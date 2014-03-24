@@ -101,10 +101,63 @@
 \section{Abstract}
 
 \section{Introduction}
+A scheduler is a vital part of any modern operating system.  It decides how to efficiently
+utilize the CPU.  This is important in the resource manager view of an operating system,
+that the OS is only supposed to manage resources.  There are three schedulers that I will
+test, the Completely Fair Scheduler(CFS), also known as SCHED\_OTHER, the First in First
+Out(FIFO) scheduler, also known as SCHED\_FIFO, and the Round Robin(RR) Scheduler, also
+known as SCHED\_RR.
+
+Every test was preformed on a Macbook Pro running Ubuntu 12.04 through VMWare Fusion.
+The VM has 2Gb of RAM, 2 Cores of the Processor, and has hardware virtualization turned
+on (Intel VT-x).  This provided very uniform data that rarely deviated more than 1-2\%.
 
 \section{Method}
+The testing code will test three different kinds of programs, CPU bound processes,
+I/O bound processes, and a mixed combination of these two.  The CPU bound process
+repededly calculates the product of two prime numbers, then preforms a factoring
+algorithm to find the two prime numbers once again.  I did this since this is a common
+process that a computer might do in real life to, for instance, crack a RSA key.  It
+is also entirely CPU bound.  Each individual process has no I/O when measuring total
+execution time.  This code was made using algorithms I found online [1][2].
+The I/O bound process will read a line at a time from /dev/urandom
+and write that line to /dev/null.  This is going to have a comparable effect to reading
+and writing to any file, a common application in everyday code.  The mixed processes
+combine these two tasks, preforming both in an interweaved fashion.  This is more
+representative of your everyday tasks that you run on a computer.  Each of these three
+types of processes are designed so as to use comperable amonuts of time on the CPU.  Each
+uses about 0.58 seconds of time where that process is running on the CPU.  This way comparing
+data will be mich easier.
+
+The main code is pa3.c.  This must be run as root like so: sudo .\\pa3 $<$number of processes$>$
+$<$scheduling scheme$>$ $<$process type$>$ $<$test type$>$.  The number of processes can be any integer.
+For my tests I consider 10 to be low, 50 to be medium, and 250 to be high.  The scheduling
+scheme can be either SCHED\_OTHER, SCHED\_FIFO, or SCHED\_RR.  The process type can be either
+cpu, io, or mixed.  The test type is the desired outcome of the test.  In order to get more
+accurate data, I decided to split up the tests.  The test type can be either extime, restime,
+or turntime.  extime is the time it takes to execute every process.  This is the total time from
+before the parent process forks each child, to after the parent process has waited for every child.
+restime is the response time of the scheduler.  This is the time from when the parent begins to fork
+each child, until after each individual child has had a chance to begin.  turntime is the Turnaround
+time of each process.  This is the time from when the process starts to the time when the process
+ends.  All of these parameters are things that a good scheduler would want to minimize.
+
+Running the code as listed above will give you a value, or a collection of values, but it is not
+designed to be run as a standalone test.  The shell scripts included will be a much easier and
+more efficient test.  The three shell scripts each run the three tests that can be run, and each
+returns the results in an easily formatted way.  Each shell script will spit out to stdout a
+table in LaTeX formatting that can be easily copied and pasted anywhere it is needed.  LaTeX is
+the standard for most academic articles, and is very easy to generate from a shell script.  These
+scripts will test each level of utilization, each scheduling scheme, and each process type, 10 times,
+then average out these values.  All of this data can be seen in Appendix A.  The only alteration to
+the code that was spit out by the scripts was a few line breaks so as to fit everything on multiple
+pages.
 
 \section{Results}
+
+The results from the scripted tests can be fully examined in Appendix A.  The averaged values will
+be explored in this section.  This is the Execution time of the processes using Low Utilizations(10
+processes):
 
 \begin{center}
 \begin{tikzpicture}
@@ -256,6 +309,10 @@ coordinates {(OTHER,0.1427) (FIFO,24.9798)
 \section{Conclusion}
 
 \section{References}
+
+[1] - http://en.wikipedia.org/wiki/Fast\_inverse\_square\_root
+
+[2] - http://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
 
 \newpage
 \section{Appendix A - Raw Data}
