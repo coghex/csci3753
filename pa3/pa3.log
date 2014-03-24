@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  21 MAR 2014 10:05
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.12.7)  23 MAR 2014 19:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1007,41 +1007,187 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
-\c@lemma=\count190
-\c@theorem=\count191
-\c@proposition=\count192
-\c@define=\count193
-\digitwidth=\dimen293
 
-(./pa3.aux)
+(/usr/local/texlive/2013basic/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.revision
+.tex)
+Package: pgfplots 2014/02/28 v1.10 Data Visualization (1.10-2-gb39fe75)
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotscore.code
+.tex
+\t@pgfplots@toka=\toks41
+\t@pgfplots@tokb=\toks42
+\t@pgfplots@tokc=\toks43
+\pgfplots@tmpa=\dimen293
+\c@pgfplots@coordindex=\count190
+\c@pgfplots@scanlineindex=\count191
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysge
+neric.code.tex))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibr
+ary.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_loader.code.tex
+Package pgfplots: loading complementary code for your PGF version...
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_misc.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks44
+\pgfkeys@temptoks=\toks45
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks46
+))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count192
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2012/09/11 v2.10 (rcs-revision 1.17)
+\pgf@plot@mark@count=\count193
+\pgfplotmarksize=\dimen294
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgflibraryfpu.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2012/11/30  (rcs-revision 1.38)
+\pgfpic=\box64
+\pgf@hbox=\box65
+\pgf@layerbox@main=\box66
+\pgf@picture@serial@count=\count194
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2012/11/07  (rcs-revision 1.5)
+)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks47
+\t@pgf@tokb=\toks48
+\t@pgf@tokc=\toks49
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pg
+fplotsoldpgfsupp_pgfutil-common-lists.tex))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil
+.code.tex
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/liststructure/pgf
+plotsliststructure.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/liststructure/pgf
+plotsliststructureext.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/liststructure/pgf
+plotsarray.code.tex
+\c@pgfplotsarray@tmp=\count195
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/liststructure/pgf
+plotsmatrix.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/numtable/pgfplots
+tableshared.code.tex
+\c@pgfplotstable@counta=\count196
+\t@pgfplotstable@a=\toks50
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/liststructure/pgf
+plotsdeque.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotsbina
+ry.code.tex
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotsbina
+ry.data.code.tex))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil
+.verb.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypg
+fplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count197
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgf
+plots.surfshading.pgfsys-pdftex.def)))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotscolo
+rmap.code.tex
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/util/pgfplotscolo
+r.code.tex))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotsstackedpl
+ots.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotsplothandl
+ers.code.tex
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotsmeshploth
+andler.code.tex))
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.
+code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotscoordproc
+essing.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.errorbar
+s.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.markers.
+code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplotsticks.cod
+e.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgfplots/pgfplots.paths.co
+de.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarydecorations.code.tex
+\tikz@lib@dec@box=\box67
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarydecorations.pathmorphing.code.tex)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibrarydecorations.pathreplacing.code.tex
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/libraries/decorations/
+pgflibrarydecorations.pathreplacing.code.tex))
+\pgfplots@numplots=\count198
+\pgfplots@xmin@reg=\dimen295
+\pgfplots@xmax@reg=\dimen296
+\pgfplots@ymin@reg=\dimen297
+\pgfplots@ymax@reg=\dimen298
+\pgfplots@zmin@reg=\dimen299
+\pgfplots@zmax@reg=\dimen300
+)
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/frontendlayer/tikz/lib
+raries/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/texlive/2013basic/texmf-dist/tex/generic/pgf/libraries/pgflibrarypl
+otmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2010/10/15 v2.10 (rcs-revision 1.12)
+)))
+\c@lemma=\count199
+\c@theorem=\count200
+\c@proposition=\count201
+Normal \count register pool exhausted, switching to extended pool.
+\c@define=\count277
+\digitwidth=\dimen301
+ (./pa3.aux)
 \openout1 = `pa3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 97.
+LaTeX Font Info:    ... okay on input line 97.
 
 (/usr/local/texlive/2013basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count194
-\scratchdimen=\dimen294
-\scratchbox=\box64
-\nofMPsegments=\count195
-\nofMParguments=\count196
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count197
-\MPscratchDim=\dimen295
-\MPnumerator=\count198
-\makeMPintoPDFobject=\count199
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count278
+\scratchdimen=\dimen302
+\scratchbox=\box68
+\nofMPsegments=\count279
+\nofMParguments=\count280
+\everyMPshowfont=\toks51
+\MPscratchCnt=\count281
+\MPscratchDim=\dimen303
+\MPnumerator=\count282
+\makeMPintoPDFobject=\count283
+\everyMPtoPDFconversion=\toks52
 ) ABD: EveryShipout initializing macros
 (/usr/local/texlive/2013basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
 slator-basic-dictionary/translator-basic-dictionary-English.dict
@@ -1051,49 +1197,54 @@ Dictionary: translator-basic-dictionary, Language: English
 viations.cfg
 File: siunitx-abbreviations.cfg 2013/07/31 v2.5s siunitx: Abbreviated units
 )
-\c@lstlisting=\count200
-\c__siunitx_mathsf_int=\count201
-LaTeX Font Info:    Try loading font information for U+msa on input line 94.
+\c@lstlisting=\count284
 
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.10} into 
+your preamble.
+ on input line 97.
+
+\c__siunitx_mathsf_int=\count285
+LaTeX Font Info:    Try loading font information for U+msa on input line 97.
 (/usr/local/texlive/2013basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 94.
+LaTeX Font Info:    Try loading font information for U+msb on input line 97.
 
 (/usr/local/texlive/2013basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 94.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 97.
 
 (/usr/local/texlive/2013basic/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Normal \count register pool exhausted, switching to extended pool.
-\c__siunitx_mathtt_int=\count277
+\c__siunitx_mathtt_int=\count286
 
-Overfull \hbox (10.71661pt too wide) in paragraph at lines 96--97
+Overfull \hbox (10.71661pt too wide) in paragraph at lines 99--100
 [] 
  []
 
 [1
 
 {/usr/local/texlive/2013basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2] [3] [4] [5] [6] (./pa3.aux) ) 
+[2] [3] [4] [5] [6] [7] [8] [9] (./pa3.aux) ) 
 Here is how much of TeX's memory you used:
- 25654 strings out of 494536
- 567874 string characters out of 6167446
- 622502 words of memory out of 5000000
- 28457 multiletter control sequences out of 15000+600000
+ 33273 strings out of 494536
+ 810488 string characters out of 6167446
+ 964304 words of memory out of 5000000
+ 35932 multiletter control sequences out of 15000+600000
  10928 words of font info for 44 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 63i,7n,57p,432b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2013basic/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on pa3.pdf (6 pages, 40273 bytes).
+ 63i,17n,84p,742b,2045s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2013basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2013basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on pa3.pdf (9 pages, 49778 bytes).
 PDF statistics:
- 34 PDF objects out of 1000 (max. 8388607)
- 23 compressed objects within 1 object stream
+ 45 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
