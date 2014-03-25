@@ -35,6 +35,7 @@ done
 echo -ne ' & & & avg & '
 fo=`echo 'scale=6; ('${num%?}')/100' | bc -l`
 echo $fo '\\'
+echo '\hline'
 done
 
 unset num
@@ -48,7 +49,7 @@ echo -ne $typ
 echo -ne ' & 1 & ' 
 num=`sudo ./pa3 50 $sched $typ restime`
 num=${num%?}
-fo=`echo 'scale=6; ('$num')/10' | bc -l`
+fo=`echo 'scale=6; ('$num')/50' | bc -l`
 echo $fo '\\'
 echo '\cline{4-5}'
 for ((i=0; i<9; i++))
@@ -63,6 +64,7 @@ done
 echo -ne ' & & & avg & '
 fo=`echo 'scale=6; ('${num%?}')/500' | bc -l`
 echo $fo '\\'
+echo '\hline'
 done
 
 unset num
@@ -76,7 +78,7 @@ echo -ne $typ
 echo -ne ' & 1 & ' 
 num=`sudo ./pa3 250 $sched $typ restime`
 num=${num%?}
-fo=`echo 'scale=6; ('$num')/10' | bc -l`
+fo=`echo 'scale=6; ('$num')/250' | bc -l`
 echo $fo '\\'
 echo '\cline{4-5}'
 for ((i=0; i<9; i++))
@@ -91,6 +93,7 @@ done
 echo -ne ' & & & avg & '
 fo=`echo 'scale=6; ('${num%?}')/2500' | bc -l`
 echo $fo '\\'
+echo '\hline'
 done
 done
 
