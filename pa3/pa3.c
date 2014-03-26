@@ -28,7 +28,7 @@ float squirt(float number) {
    return 1/y;
 }
 
-int isprime(a) {
+int isprime(int a) {
    int c;
  
    for ( c = 2 ; c <= a - 1 ; c++ )

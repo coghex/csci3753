@@ -100,6 +100,14 @@
 
 \section{Abstract}
 
+The Linux Scheduler has been the Completely Fair Scheduler (CFS) for a while now, but is
+it the most efficient scheduler? That is up for debate.  This report will address the pros
+and cons of each scheduling scheme as well as comparing it to a completely different
+scheduler.  We will show that the Brain Fuck Scheduler (BFS) is far more efficient for
+everyday personal computing tasks, and much more suited to what Linux home distrobutions
+should build default with.  We will also show that the default scheduling scheme of the
+CFS is far better than the other real time schemes.
+
 \section{Introduction}
 A scheduler is a vital part of any modern operating system.  It decides how to efficiently
 utilize the CPU.  This is important in the resource manager view of an operating system,
@@ -154,10 +162,15 @@ then average out these values.  All of this data can be seen in Appendix A.  The
 the code that was spit out by the scripts was a few line breaks so as to fit everything on multiple
 pages.
 
+I chose the testing parameters I did because I feel that they most reflect the everyday use of
+common home computers.  Other parameters may matter to a supercomputer or a server, but for
+a home computer, at the end of the day, you want to know how fast is my computer going to go?
+Turnaround time, response time, and total execution time, are the main factors involved in this.
+
 \section{Results}
 
 The results from the scripted tests can be fully examined in Appendix A.  The averaged values will
-be explored in this section.  This is the Execution time of the processes using Low Utilizations(10
+be explored in this section.  This is the Execution time of the processes using Low Utilizations (10
 processes):
 
 \begin{center}
@@ -191,7 +204,8 @@ coordinates {(OTHER,3.645130) (FIFO,4.063036)
 
 As you can see, the CFS scheduler's default behavior is far more efficient than
 the other real-time policies in the long run.  For a CPU based process, SCHED\_OTHER
-is by far the fastest.  FIFO and RR are relatively equivalent.
+is by far the fastest.  FIFO and RR are relatively equivalent.  When we run with
+medium utilization (50 processes), we see that:
 
 \begin{center}
 \begin{tikzpicture}
@@ -224,6 +238,7 @@ coordinates {(OTHER,19.010271) (FIFO,20.038686)
 
 At medium utilization, the benifit of SCHED\_OTHER begins to taper off,
 and is not so apparent.  For mixed processes, the preformance is comperable.
+When we use high utilization (250 processes) we find:
 
 \begin{center}
 \begin{tikzpicture}
@@ -257,7 +272,7 @@ coordinates {(OTHER,92.046282) (FIFO,93.061726)
 Once again the preformance for mixed and cpu bound processes are comperable.  An
 I/O bound program, however, is far faster on SCHED\_OTHER.  This is because the process
 of blocking it, and then moving to the next process becomes much more apparant at high
-amounts of processes.
+amounts of processes. We can see the response time in the following charts:
 
 \begin{center}
 \begin{tikzpicture}
@@ -349,7 +364,7 @@ coordinates {(OTHER,0.507447) (FIFO,55.549027)
 The Response time is relatively the same regardless of utilization.  SCHED\_OTHER
 is by far the fastest, but SCHED\_FIFO is by far the slowest.  This is what makes
 sense intuitively, since FIFO will wait until a process is done before beginning
-on the next one.
+on the next one.  We can see the turnaround time in the following charts:
 
 \begin{center}
 \begin{tikzpicture}
