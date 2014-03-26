@@ -1,6 +1,6 @@
 TARGET = pa3
 CC = gcc
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -Wextra
 
 .PHONY: default all clean
 
