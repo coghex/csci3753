@@ -1,5 +1,4 @@
 #define FUSE_USE_VERSION 28
-#define HAVE_SETXATTR
 
 #ifdef HAVE_CONFIG_H
 #include <config.h>
@@ -19,11 +18,10 @@
 #include <fcntl.h>
 #include <dirent.h>
 #include <errno.h>
-#include "aes-crypt.h"
 #include <sys/time.h>
-#ifdef HAVE_SETXATTR
 #include <sys/xattr.h>
-#endif
+
+#include "aes-crypt.h"
 
 #define DATA ((struct data *) fuse_get_context()->private_data)
 
@@ -37,7 +35,7 @@ void pathcat(char fpath[PATH_MAX], const char *path) {
   strncat(fpath, path, PATH_MAX);
 }
 
-static int xmp_getattr(const char *path, struct stat *stbuf)
+static int chfs_getattr(const char *path, struct stat *stbuf)
 {
   int res;
   char newpath[PATH_MAX];
@@ -50,7 +48,7 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
   return 0;
 }
 
-static int xmp_access(const char *path, int mask)
+static int chfs_access(const char *path, int mask)
 {
   int res;
   char newpath[PATH_MAX];
@@ -64,7 +62,7 @@ static int xmp_access(const char *path, int mask)
   return 0;
 }
 
-static int xmp_readlink(const char *path, char *buf, size_t size)
+static int chfs_readlink(const char *path, char *buf, size_t size)
 {
   int res;
   char newpath[PATH_MAX];
@@ -79,7 +77,7 @@ static int xmp_readlink(const char *path, char *buf, size_t size)
 }
 
 
-static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
+static int chfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 		       off_t offset, struct fuse_file_info *fi)
 {
   DIR *dp;
@@ -107,7 +105,7 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
   return 0;
 }
 
-static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
+static int chfs_mknod(const char *path, mode_t mode, dev_t rdev)
 {
   int res;
   char newpath[PATH_MAX];
@@ -129,7 +127,7 @@ static int xmp_mknod(const char *path, mode_t mode, dev_t rdev)
   return 0;
 }
 
-static int xmp_mkdir(const char *path, mode_t mode)
+static int chfs_mkdir(const char *path, mode_t mode)
 {
   int res;
   char newpath[PATH_MAX];
@@ -142,7 +140,7 @@ static int xmp_mkdir(const char *path, mode_t mode)
   return 0;
 }
 
-static int xmp_unlink(const char *path)
+static int chfs_unlink(const char *path)
 {
   int res;
   char newpath[PATH_MAX];
@@ -155,7 +153,7 @@ static int xmp_unlink(const char *path)
   return 0;
 }
 
-static int xmp_rmdir(const char *path)
+static int chfs_rmdir(const char *path)
 {
   int res;
   char newpath[PATH_MAX];
@@ -168,7 +166,7 @@ static int xmp_rmdir(const char *path)
   return 0;
 }
 
-static int xmp_symlink(const char *from, const char *to)
+static int chfs_symlink(const char *from, const char *to)
 {
   int res;
 
@@ -179,7 +177,7 @@ static int xmp_symlink(const char *from, const char *to)
   return 0;
 }
 
-static int xmp_rename(const char *from, const char *to)
+static int chfs_rename(const char *from, const char *to)
 {
   int res;
 
@@ -190,7 +188,7 @@ static int xmp_rename(const char *from, const char *to)
   return 0;
 }
 
-static int xmp_link(const char *from, const char *to)
+static int chfs_link(const char *from, const char *to)
 {
   int res;
 
@@ -201,7 +199,7 @@ static int xmp_link(const char *from, const char *to)
   return 0;
 }
 
-static int xmp_chmod(const char *path, mode_t mode)
+static int chfs_chmod(const char *path, mode_t mode)
 {
   int res;
   char newpath[PATH_MAX];
@@ -214,7 +212,7 @@ static int xmp_chmod(const char *path, mode_t mode)
   return 0;
 }
 
-static int xmp_chown(const char *path, uid_t uid, gid_t gid)
+static int chfs_chown(const char *path, uid_t uid, gid_t gid)
 {
   int res;
   char newpath[PATH_MAX];
@@ -227,7 +225,7 @@ static int xmp_chown(const char *path, uid_t uid, gid_t gid)
   return 0;
 }
 
-static int xmp_truncate(const char *path, off_t size)
+static int chfs_truncate(const char *path, off_t size)
 {
   int res;
   char newpath[PATH_MAX];
@@ -240,7 +238,7 @@ static int xmp_truncate(const char *path, off_t size)
   return 0;
 }
 
-static int xmp_utimens(const char *path, const struct timespec ts[2])
+static int chfs_utimens(const char *path, const struct timespec ts[2])
 {
   int res;
   struct timeval tv[2];
@@ -259,7 +257,7 @@ static int xmp_utimens(const char *path, const struct timespec ts[2])
   return 0;
 }
 
-static int xmp_open(const char *path, struct fuse_file_info *fi)
+static int chfs_open(const char *path, struct fuse_file_info *fi)
 {
   int res;
   char newpath[PATH_MAX];
@@ -273,7 +271,7 @@ static int xmp_open(const char *path, struct fuse_file_info *fi)
   return 0;
 }
 
-static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
+static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
   int fd;
@@ -290,11 +288,12 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
   if (res == -1)
     res = -errno;
 
+
   close(fd);
   return res;
 }
 
-static int xmp_write(const char *path, const char *buf, size_t size,
+static int chfs_write(const char *path, const char *buf, size_t size,
 		     off_t offset, struct fuse_file_info *fi)
 {
   int fd;
@@ -315,7 +314,7 @@ static int xmp_write(const char *path, const char *buf, size_t size,
   return res;
 }
 
-static int xmp_statfs(const char *path, struct statvfs *stbuf)
+static int chfs_statfs(const char *path, struct statvfs *stbuf)
 {
   int res;
   char newpath[PATH_MAX];
@@ -328,31 +327,51 @@ static int xmp_statfs(const char *path, struct statvfs *stbuf)
   return 0;
 }
 
-static int xmp_create(const char* path, mode_t mode, struct fuse_file_info* fi)
+static int chfs_create(const char* path, mode_t mode, struct fuse_file_info* fi)
 {
   (void) fi;
   char newpath[PATH_MAX];
+  char temppath[PATH_MAX];
   pathcat(newpath, path);
+  strcpy(temppath, newpath);
+  strcat(temppath, ".enc");
+  FILE * in;
+  FILE * temp;
+  char iscrypt[8];
+
+  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
 
   int res;
   res = creat(newpath, mode);
   if(res == -1)
-    return -errno;
+    return -errno; 
 
   close(res);
 
+  in = fopen(newpath, "rb"); 
+  temp = fopen(temppath, "wb+");
+
+  if(!do_crypt(in, temp, 1, DATA->key)){
+    fprintf(stderr, "do_crypt failed\n");
+  }
+
+  fclose(in);
+  fclose(temp);
+
+  setxattr(newpath, "user.chfs.crypt", "true", sizeof("true"), 0);
+  
   return 0;
 }
 
 
-static int xmp_release(const char *path, struct fuse_file_info *fi)
+static int chfs_release(const char *path, struct fuse_file_info *fi)
 {
   (void) path;
   (void) fi;
   return 0;
 }
 
-static int xmp_fsync(const char *path, int isdatasync,
+static int chfs_fsync(const char *path, int isdatasync,
 		     struct fuse_file_info *fi)
 {
   (void) path;
@@ -361,7 +380,7 @@ static int xmp_fsync(const char *path, int isdatasync,
   return 0;
 }
 
-static int xmp_setxattr(const char *path, const char *name, const char *value,
+static int chfs_setxattr(const char *path, const char *name, const char *value,
 			size_t size, int flags)
 {
   char newpath[PATH_MAX];
@@ -372,7 +391,7 @@ static int xmp_setxattr(const char *path, const char *name, const char *value,
   return 0;
 }
 
-static int xmp_getxattr(const char *path, const char *name, char *value,
+static int chfs_getxattr(const char *path, const char *name, char *value,
 			size_t size)
 {
   char newpath[PATH_MAX];
@@ -383,7 +402,7 @@ static int xmp_getxattr(const char *path, const char *name, char *value,
   return res;
 }
 
-static int xmp_listxattr(const char *path, char *list, size_t size)
+static int chfs_listxattr(const char *path, char *list, size_t size)
 {
   char newpath[PATH_MAX];
   pathcat(newpath, path);
@@ -393,7 +412,7 @@ static int xmp_listxattr(const char *path, char *list, size_t size)
   return res;
 }
 
-static int xmp_removexattr(const char *path, const char *name)
+static int chfs_removexattr(const char *path, const char *name)
 {
   char newpath[PATH_MAX];
   pathcat(newpath, path);
@@ -403,33 +422,33 @@ static int xmp_removexattr(const char *path, const char *name)
   return 0;
 }
 
-static struct fuse_operations xmp_oper = {
-  .getattr	= xmp_getattr,
-  .access	= xmp_access,
-  .readlink	= xmp_readlink,
-  .readdir	= xmp_readdir,
-  .mknod	= xmp_mknod,
-  .mkdir	= xmp_mkdir,
-  .symlink	= xmp_symlink,
-  .unlink	= xmp_unlink,
-  .rmdir	= xmp_rmdir,
-  .rename	= xmp_rename,
-  .link		= xmp_link,
-  .chmod	= xmp_chmod,
-  .chown	= xmp_chown,
-  .truncate	= xmp_truncate,
-  .utimens	= xmp_utimens,
-  .open		= xmp_open,
-  .read		= xmp_read,
-  .write	= xmp_write,
-  .statfs	= xmp_statfs,
-  .create       = xmp_create,
-  .release	= xmp_release,
-  .fsync	= xmp_fsync,
-  .setxattr	= xmp_setxattr,
-  .getxattr	= xmp_getxattr,
-  .listxattr	= xmp_listxattr,
-  .removexattr	= xmp_removexattr,
+static struct fuse_operations chfs_oper = {
+  .getattr	= chfs_getattr,
+  .access	= chfs_access,
+  .readlink	= chfs_readlink,
+  .readdir	= chfs_readdir,
+  .mknod	= chfs_mknod,
+  .mkdir	= chfs_mkdir,
+  .symlink	= chfs_symlink,
+  .unlink	= chfs_unlink,
+  .rmdir	= chfs_rmdir,
+  .rename	= chfs_rename,
+  .link		= chfs_link,
+  .chmod	= chfs_chmod,
+  .chown	= chfs_chown,
+  .truncate	= chfs_truncate,
+  .utimens	= chfs_utimens,
+  .open		= chfs_open,
+  .read		= chfs_read,
+  .write	= chfs_write,
+  .statfs	= chfs_statfs,
+  .create       = chfs_create,
+  .release	= chfs_release,
+  .fsync	= chfs_fsync,
+  .setxattr	= chfs_setxattr,
+  .getxattr	= chfs_getxattr,
+  .listxattr	= chfs_listxattr,
+  .removexattr	= chfs_removexattr,
 };
 
 void usage() {
@@ -453,5 +472,5 @@ int main(int argc, char *argv[])
   argc = argc - 2;
   
   umask(0);
-  return fuse_main(argc, argv, &xmp_oper, myargs);
+  return fuse_main(argc, argv, &chfs_oper, myargs);
 }
