@@ -5,12 +5,12 @@
 #endif
 
 #ifdef linux
-/* For pread()/pwrite() */
-#define _XOPEN_SOURCE 500
+#define _XOPEN_SOURCE 700
 #endif
 
 #include <fuse.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <limits.h>
 #include <stdlib.h>
@@ -23,15 +23,15 @@
 
 #include "aes-crypt.h"
 
-#define DATA ((struct data *) fuse_get_context()->private_data)
-
 struct data {
   char* rootdir;
   char* key;
+  FILE* log;
 };
 
 void pathcat(char fpath[PATH_MAX], const char *path) {
-  strcpy(fpath, DATA->rootdir);
+  struct data * ohai = (struct data *)(fuse_get_context()->private_data);
+  strcpy(fpath, ohai->rootdir);
   strncat(fpath, path, PATH_MAX);
 }
 
@@ -274,43 +274,101 @@ static int chfs_open(const char *path, struct fuse_file_info *fi)
 static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
 		    struct fuse_file_info *fi)
 {
-  int fd;
   int res;
   char newpath[PATH_MAX];
+  char *data;
+  size_t msize;
   pathcat(newpath, path);
+  FILE *in, *mf;
+  char iscrypt[8];
+  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
+  int crypt=-1;
+  struct data * ohai = (struct data *)(fuse_get_context()->private_data);
+  fprintf(ohai->log, "read was called!\n");
 
   (void) fi;
-  fd = open(newpath, O_RDONLY);
-  if (fd == -1)
+
+  in = fopen(newpath, "r");
+  mf = open_memstream(&data, &msize);
+
+  if (in==NULL)
+    fprintf(ohai->log, "cannot open %s\n", newpath);
+    return -errno;
+  if (mf==NULL)
+    fprintf(ohai->log, "cannot open memfile\n");
     return -errno;
 
-  res = pread(fd, buf, size, offset);
+  if(strcmp(iscrypt, "true")) {
+    crypt=0;
+  }
+
+  do_crypt(in, mf, crypt, ohai->key);
+
+  fclose(in);
+
+  fflush(mf);
+  fseek(mf, offset, SEEK_SET);
+  res = fread(buf, 1, size, mf);
+  fclose(mf);
+
   if (res == -1)
+    fprintf(ohai->log, "shit... read error\n");
     res = -errno;
 
-
-  close(fd);
   return res;
 }
 
 static int chfs_write(const char *path, const char *buf, size_t size,
 		     off_t offset, struct fuse_file_info *fi)
 {
-  int fd;
+  FILE *mf, *in;
+  char *data;
+  size_t msize;
   int res;
   char newpath[PATH_MAX];
   pathcat(newpath, path);
+  char iscrypt[8];
+  int crypt = -1;
+  struct data * ohai = (struct data *) (fuse_get_context()->private_data);
+  fprintf(ohai->log, "write was called!\n");
 
   (void) fi;
-  fd = open(newpath, O_WRONLY);
-  if (fd == -1)
+
+  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
+  in = fopen(newpath, "r");
+  mf = open_memstream(&data, &msize);
+
+  if (in == NULL || mf == NULL)
     return -errno;
 
-  res = pwrite(fd, buf, size, offset);
+  if (strcmp(iscrypt, "true")) {
+    crypt = 0;
+  }
+
+  do_crypt(in, mf, crypt, ohai->key);
+
+  fclose(in);
+
+  fseek(mf, offset, SEEK_SET);
+
+  res = fwrite(buf, 1, size, mf);
   if (res == -1)
     res = -errno;
 
-  close(fd);
+  fflush(mf);
+
+  if (crypt == 0) {
+    crypt = 1;
+  }
+
+  in = fopen(newpath, "w");
+  fseek(mf, 0, SEEK_SET);
+
+  do_crypt(mf, in, crypt, ohai->key);
+
+  fclose(mf);
+  fclose(in);
+
   return res;
 }
 
@@ -330,36 +388,35 @@ static int chfs_statfs(const char *path, struct statvfs *stbuf)
 static int chfs_create(const char* path, mode_t mode, struct fuse_file_info* fi)
 {
   (void) fi;
+  (void) mode;
   char newpath[PATH_MAX];
   char temppath[PATH_MAX];
   pathcat(newpath, path);
   strcpy(temppath, newpath);
-  strcat(temppath, ".enc");
+  strcat(temppath, ".temp");
   FILE * in;
   FILE * temp;
   char iscrypt[8];
+  struct data * ohai = (struct data *) (fuse_get_context()->private_data);
 
-  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
+  fprintf(ohai->log, "create was called!\n");
 
-  int res;
-  res = creat(newpath, mode);
-  if(res == -1)
-    return -errno; 
+  in = fopen(newpath, "w");
+  temp = fopen(temppath, "r");
 
-  close(res);
+  if(in == NULL)
+    fprintf(ohai->log, "cannot open %s\n", newpath);
+    return -errno;
 
-  in = fopen(newpath, "rb"); 
-  temp = fopen(temppath, "wb+");
-
-  if(!do_crypt(in, temp, 1, DATA->key)){
-    fprintf(stderr, "do_crypt failed\n");
-  }
-
-  fclose(in);
+  do_crypt(temp, in, 1, ohai->key);
   fclose(temp);
 
-  setxattr(newpath, "user.chfs.crypt", "true", sizeof("true"), 0);
-  
+  if(fgetxattr(fileno(in), "user.chfs.crypt", iscrypt, 8))
+    fprintf(ohai->log, "Cannot get attribute\n");
+    return -errno;
+
+  fclose(in);
+
   return 0;
 }
 
@@ -458,6 +515,7 @@ void usage() {
 int main(int argc, char *argv[])
 {
   struct data* myargs;
+
   myargs = malloc(sizeof(struct data));
   if (argc<4){
     usage();
@@ -470,7 +528,17 @@ int main(int argc, char *argv[])
   argv[3] = NULL;
   argv[2] = NULL;
   argc = argc - 2;
-  
+
+  myargs->log = fopen("chfs.log", "w+");
+  if (myargs->log == NULL) {
+    printf("Fuck!\n");
+    exit(1);
+  }
+
+  setvbuf(myargs->log, NULL, _IOLBF, 0);
+
+  fprintf(myargs->log, "beginning log!\n");
+
   umask(0);
   return fuse_main(argc, argv, &chfs_oper, myargs);
 }

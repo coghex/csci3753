@@ -16,6 +16,7 @@ aes-crypt.o: aes-crypt.c aes-crypt.h
 
 clean:
 	rm -f *.o
+	rm -f *.log
 	rm -f pa4
 	fusermount -u ./root
 
