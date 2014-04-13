@@ -281,25 +281,25 @@ static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
   pathcat(newpath, path);
   FILE *in, *mf;
   char iscrypt[8];
-  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
   int crypt=-1;
-  struct data * ohai = (struct data *)(fuse_get_context()->private_data);
-  fprintf(ohai->log, "read was called!\n");
-
   (void) fi;
 
-  in = fopen(newpath, "r");
+  in = fopen(newpath, "rb");
   mf = open_memstream(&data, &msize);
 
-  if (in==NULL)
-    fprintf(ohai->log, "cannot open %s\n", newpath);
-    return -errno;
-  if (mf==NULL)
-    fprintf(ohai->log, "cannot open memfile\n");
-    return -errno;
+  struct data * ohai = (struct data *)(fuse_get_context()->private_data);
 
-  if(strcmp(iscrypt, "true")) {
-    crypt=0;
+  if (in==NULL) {
+    return -errno;
+  }
+  if (mf==NULL) {
+    return -errno;
+  }
+
+  if (getxattr(newpath, "user.chfs.crypt", iscrypt, 8) != -1){
+    if (strcmp(iscrypt, "true")) {
+      crypt=0;
+    }
   }
 
   do_crypt(in, mf, crypt, ohai->key);
@@ -311,9 +311,10 @@ static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
   res = fread(buf, 1, size, mf);
   fclose(mf);
 
-  if (res == -1)
+  if (res == -1) {
     fprintf(ohai->log, "shit... read error\n");
     res = -errno;
+  }
 
   return res;
 }
@@ -334,16 +335,19 @@ static int chfs_write(const char *path, const char *buf, size_t size,
 
   (void) fi;
 
-  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
   in = fopen(newpath, "r");
   mf = open_memstream(&data, &msize);
 
-  if (in == NULL || mf == NULL)
+  if (in == NULL || mf == NULL) {
     return -errno;
-
-  if (strcmp(iscrypt, "true")) {
-    crypt = 0;
   }
+
+  if (getxattr(newpath, "user.chfs.crypt", iscrypt, 8) != -1) {
+    if (strcmp(iscrypt, "true")) {
+      crypt = 0;
+    }
+  }
+
 
   do_crypt(in, mf, crypt, ohai->key);
 
@@ -352,8 +356,9 @@ static int chfs_write(const char *path, const char *buf, size_t size,
   fseek(mf, offset, SEEK_SET);
 
   res = fwrite(buf, 1, size, mf);
-  if (res == -1)
+  if (res == -1) {
     res = -errno;
+  }
 
   fflush(mf);
 
@@ -390,30 +395,28 @@ static int chfs_create(const char* path, mode_t mode, struct fuse_file_info* fi)
   (void) fi;
   (void) mode;
   char newpath[PATH_MAX];
-  char temppath[PATH_MAX];
   pathcat(newpath, path);
-  strcpy(temppath, newpath);
-  strcat(temppath, ".temp");
   FILE * in;
   FILE * temp;
-  char iscrypt[8];
   struct data * ohai = (struct data *) (fuse_get_context()->private_data);
 
   fprintf(ohai->log, "create was called!\n");
 
   in = fopen(newpath, "w");
-  temp = fopen(temppath, "r");
+  temp = tmpfile();
 
-  if(in == NULL)
+  if(in == NULL) {
     fprintf(ohai->log, "cannot open %s\n", newpath);
     return -errno;
+  }
 
   do_crypt(temp, in, 1, ohai->key);
   fclose(temp);
 
-  if(fgetxattr(fileno(in), "user.chfs.crypt", iscrypt, 8))
-    fprintf(ohai->log, "Cannot get attribute\n");
+  if(fsetxattr(fileno(in), "user.chfs.crypt", "true", 4, 0)) {
+    fprintf(ohai->log, "Cannot set attribute\n");
     return -errno;
+  }
 
   fclose(in);
 
