@@ -12,6 +12,6 @@ In order to run, first type
 
 then:
 
-> ./pa4 <key> <source directory> <mount directory>
+> ./pa4 \<key\> \<source directory\> \<mount directory\>
 
 this will mount the file system at the mount directory.
