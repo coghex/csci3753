@@ -284,10 +284,12 @@ static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
   int crypt=-1;
   (void) fi;
 
-  in = fopen(newpath, "rb");
+  in = fopen(newpath, "r");
   mf = open_memstream(&data, &msize);
 
   struct data * ohai = (struct data *)(fuse_get_context()->private_data);
+
+  fprintf(ohai->log, "read was called!\n");
 
   if (in==NULL) {
     return -errno;
@@ -297,7 +299,7 @@ static int chfs_read(const char *path, char *buf, size_t size, off_t offset,
   }
 
   if (getxattr(newpath, "user.chfs.crypt", iscrypt, 8) != -1){
-    if (strcmp(iscrypt, "true")) {
+    if (!strcmp(iscrypt, "true")) {
       crypt=0;
     }
   }
@@ -342,10 +344,10 @@ static int chfs_write(const char *path, const char *buf, size_t size,
     return -errno;
   }
 
-  if (getxattr(newpath, "user.chfs.crypt", iscrypt, 8) != -1) {
-    if (strcmp(iscrypt, "true")) {
-      crypt = 0;
-    }
+  getxattr(newpath, "user.chfs.crypt", iscrypt, 8);
+  if (!strcmp(iscrypt, "true")) {
+    fprintf(ohai->log, "This file is encrypted\n");
+    crypt = 0;
   }
 
 
