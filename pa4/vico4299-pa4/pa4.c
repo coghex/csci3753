@@ -543,6 +543,7 @@ int main(int argc, char *argv[])
   setvbuf(myargs->log, NULL, _IOLBF, 0);
 
   fprintf(myargs->log, "beginning log!\n");
+  fprintf(myargs->log, "--------------\n");
 
   umask(0);
   return fuse_main(argc, argv, &chfs_oper, myargs);
