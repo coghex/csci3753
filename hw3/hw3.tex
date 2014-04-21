@@ -125,19 +125,25 @@
 \end{figure}
 \begin{enumerate}[(a)]
   \item{FIFO}\\
-    3-fault, 2-fault, 4-fault, 3-hit, 4-hit, 2-hit, 2-hit, 3-hit, 4-hit, 5-fault, 6-fault, 7-fault,
-    7-hit, 6-hit, 5-hit, 4-fault, 5-hit, 6-hit, 7-fault, 2-fault, 1-fault.
-
-    Thats 10 faults.
+    \begin{tabular}{ c c c c c c c c c c c c }
+      3 & 3 & 3 & 5 & 5 & 5 & 4 & 4 & 4 & 7 & 7 & 7 \\
+        & 2 & 2 & 2 & 6 & 6 & 6 & 5 & 5 & 5 & 2 & 2 \\
+        &   & 4 & 4 & 4 & 7 & 7 & 7 & 6 & 6 & 6 & 1 \\
+    \end{tabular}\\
+    Thats 12 faults.
   \item{OPT}\\
-    3-fault, 2-fault, 4-fault, 3-hit, 4-hit, 2-hit, 2-hit, 3-hit, 4-hit, 5-fault, 6-fault, 7-fault,
-    7-hit, 6-hit, 5-hit, 4-fault, 5-hit, 6-hit, 7-fault, 2-fault, 1-fault.
-
-    Thats 10 faults.
+    \begin{tabular}{ c c c c c c c c c c c c }
+      3 & 3 & 3 & 5 & 5 & 5 & 5 & 7 & 7 \\
+        & 2 & 2 & 2 & 6 & 6 & 6 & 6 & 2 \\
+        &   & 4 & 4 & 4 & 7 & 4 & 4 & 1 \\
+    \end{tabular}\\
+    Thats 9 faults.
   \item{LRU}\\
-    3-fault, 2-fault, 4-fault, 3-hit, 4-hit, 2-hit, 2-hit, 3-hit, 4-hit, 5-fault, 6-fault, 7-fault,
-    7-hit, 6-hit, 5-hit, 4-fault, 5-hit, 6-hit, 7-fault, 2-fault, 1-fault.
-
+    \begin{tabular}{ c c c c c c c c c c c c }
+      3 & 3 & 3 & 3 & 6 & 6 & 6 & 6 & 6 & 1 \\
+        & 2 & 2 & 5 & 5 & 5 & 5 & 5 & 2 & 2 \\
+        &   & 4 & 4 & 4 & 7 & 4 & 7 & 7 & 7 \\
+    \end{tabular}\\
     Thats 10 faults.
 \end{enumerate}
 
@@ -147,14 +153,18 @@
 \end{center}
 \end{figure}
 
-
+\[
+  p\_TLB\cdot T  + (1-p\_TLB)\cdot p\cdot (T + M) + (1-p\_TLB)(1-p)(T + M + D)
+\]
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=14cm]{f4}
 \end{center}
 \end{figure}
-
+\[
+  t = 0.999ms \approx 1ms
+\]
 
 \end{document}
 
