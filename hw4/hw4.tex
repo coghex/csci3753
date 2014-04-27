@@ -1,0 +1,190 @@
+\documentclass[12pt, notitlepage, final]{article}
+
+\newcommand{\name}{Vince Coghlan}
+
+%\usepackage[dvips]{graphics,color}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{nccmath}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
+\usepackage[siunitx]{circuitikz}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{cancel}
+\usepackage{setspace}
+\usepackage{overpic}
+\usepackage{mathtools}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{qtree}
+\usepackage{gensymb}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+
+\numberwithin{equation}{section}
+\newcommand{\dbr}[1]{d_{\mbox{#1BR}}}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{corollary}{Corollary}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{define}{Definition}
+
+\newdimen\digitwidth{}
+\settowidth\digitwidth{0}
+\def~{\hspace{\digitwidth}}
+
+\setlength{\parskip}{1pc}
+\setlength{\parindent}{0pt}
+\setlength{\topmargin}{-3pc}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0pc}
+\setlength{\evensidemargin}{0pc}
+\setlength{\textwidth}{6.5in}
+\newcommand{\answer}[1]{\newpage\noindent\framebox{\vbox{{\bf CSCI 3753 Spring 2014} 
+\hfill {\bf \name} \vspace{-1cm}
+\begin{center}{Homework \#4}\end{center} } }\bigskip }
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%absolute value code
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\makeatletter
+\let\oldabs\abs{}
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+%
+\let\oldnorm\norm{}
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
+
+\def\dbar{{\mathchar'26\mkern-12mu d}}
+\def\Frac{\displaystyle\frac}
+\def\Sum{\displaystyle\sum}
+\def\Int{\displaystyle\int}
+\def\Prod{\displaystyle\prod}
+\def\P[x]{\Frac{\partial}{\partial{} x}}
+\def\D[x]{\Frac{d}{dx}}
+\newcommand{\PD}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\PF}[1]{\frac{\partial}{\partial#1}}
+\newcommand{\DD}[2]{\frac{d#1}{d#2}}
+\newcommand{\DF}[1]{\frac{d}{d#1}}
+\newcommand{\fix}[2]{\left(#1\right)_#2}
+\newcommand{\ket}[1]{|#1\rangle}
+\newcommand{\bra}[1]{\langle#1|}
+\newcommand{\braket}[2]{\langle{} #1 | #2 \rangle}
+\newcommand{\bopk}[3]{\langle{} #1 | #2 | #3 \rangle}
+\newcommand{\Choose}[2]{\displaystyle{} {#1 \choose{} #2}}
+\newcommand{\proj}[1]{\ket{#1}\bra{#1}}
+\def\del{\vec{\nabla}}
+\newcommand{\avg}[1]{\langle#1\rangle}
+\newcommand{\piecewise}[4]{\left\{\beginProtected{array}{rl}#1&:#2\\#3&:#4\endProtected{array}\right.}
+\newcommand{\systeme}[2]{\left\{\beginProtected{array}{rl}#1\\#2\endProtected{array}\right.}
+\def\KE{K\!E}
+\def\Godel{G$\ddot{\mbox{o}}$del}
+
+\onehalfspacing{}
+
+\begin{document}
+
+\answer{}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f1}
+\end{center}
+\end{figure}
+
+132MB fits into 66000 Blocks.  We need a pointer for every block as well as a EOF pointer and
+directory table entry, This means $66002\cdot4=264008$ bytes.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f2}
+\end{center}
+\end{figure}
+
+We still need 66000 pointers,  excluding the first 12 pointers, that is 129 blocks.  That is easily covered by one
+singly indirect pointer.  The total memory used is thus $15+2K+129\cdot2K=266255$Bytes.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f3}
+\end{center}
+\end{figure}
+66000
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f4}
+\end{center}
+\end{figure}
+$13+1+1=15$
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f5}
+\end{center}
+\end{figure}
+
+$1024/8=128$ bytes
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f6}
+\end{center}
+\end{figure}
+
+$(1024-300)*2=1448$ bytes
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f7}
+\end{center}
+\end{figure}
+
+if there are less than 64 free blocks then it will take less than 128 bytes.  The bitmap will always take 128 bytes.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f8}
+\end{center}
+\end{figure}
+
+\[
+  \abs{103-30}+\abs{30-80}+\abs{80-200}+\abs{200-3}+\abs{3-702}+
+\]
+\[
+  \abs{80-702}+\abs{96-80}+\abs{89-96}+\abs{89-100}=1795
+\]
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f9}
+\end{center}
+\end{figure}
+
+\[
+  \abs{103-100}+\abs{100-96}+\abs{96-89}+\abs{89-80}+\abs{80-80}+
+\]
+\[
+  \abs{80-30}+\abs{30-3}+\abs{3-200}+\abs{200-702}=799
+\]
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=13cm]{f10}
+\end{center}
+\end{figure}
+
+\[
+  \abs{103-702}+\abs{702-3}=1298
+\]
+
+\end{document}
+
